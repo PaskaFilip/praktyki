@@ -1,0 +1,29 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\InMemoryUser: plaintext
+    providers:
+          users_in_memory:
+            memory:
+                users:
+                    user:
+                        password: 'user'
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: 'admin'
+                        roles: 'ROLE_ADMIN'      
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: false
+            provider: users_in_memory
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /lista
+            logout:
+                path: app_logout
+    access_control:
+        - { path: ^/lista, roles: ROLE_ADMIN }
+        - { path: ^/populate, roles: ROLE_ADMIN }

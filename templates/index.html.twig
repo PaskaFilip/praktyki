@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Lista postów{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        {% endblock %}
+    </head>
+    <body class="bg-dark">
+        {% block body %}
+            <p class="h1 text-center text-info ">Lista Postów:</p>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+            {% for post in posts %}
+            <p class="h2 text-center text-primary">{{post.name}}</p>
+                <div class="border border-3 border-success ">
+                <p class="h3 text-center text-secondary">{{post.title}}</p>
+                <p class="h4 text-center text-muted">{{post.body}}</p>
+                </div><br>
+                <div class="text-center">
+                <a href="/lista/{{post.id}}/delete" class="btn btn-danger">Delete</a>
+                </div><br>
+            {% endfor %}
+        {% endblock %}
+    </body>
+</html>
